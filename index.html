@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <title> Predicting Conflict Occurrence   with   Search History Data</title>
+    <meta charset="utf-8" />
+    <meta name="author" content=".pull-left[ Eric Dunford   Georgetown University] .pull-right[ David Cunningham   University of Maryland]" />
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <link href="libs/remark-css/default-fonts.css" rel="stylesheet" />
+    <script src="libs/kePrint/kePrint.js"></script>
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# <br><strong>Predicting Conflict Occurrence <br> with <br> Search History Data</strong>
+### .pull-left[<br><strong>Eric Dunford</strong> <br> <em>Georgetown University</em>] .pull-right[<br><strong>David Cunningham</strong> <br> <em>University of Maryland</em>]
+### <br><br><br><br><br><strong>ISA</strong><br><em>Spring 2019</em>
+
+---
+
+
+
+
+.center[
+&lt;img src = "Figures/country-1.png", width=600&gt;
+]
+
+---
+
+.center[
+&lt;img src = "Figures/country-2.png", width=600&gt;
+]
+
+---
+
+.center[
+&lt;img src = "Figures/ts_animation.gif", width=600&gt;
+]
+
+
+---
+
+.center[
+&lt;img src = "Figures/country-3.png", width=600&gt;
+]
+
+---
+
+.center[
+#### Sampled Keywords
+]
+
+.center[
+&lt;img src = "Figures/trends_data.png" width=1000&gt;
+]
+
+---
+
+.center[
+&lt;img src = "Figures/roc-performance-plot.png", width=600&gt;
+]
+
+---
+
+.center[
+### Keyword Importance
+]
+&lt;table class="table table-striped" style="font-size: 16px; margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:center;"&gt; order &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; Protest &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; Organized Violence &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; Riots &lt;/th&gt;
+   &lt;th style="text-align:center;"&gt; Violence Against Civilians &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; porn &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; gay &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; porn &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; porn &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; wife &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; porn &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; wife &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; gay &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; 3 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; gay &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; allah &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; gay &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; jobs &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; 4 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; god &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; sex &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; boss &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; wife &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; allah &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; internet &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; kill &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; sex &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; 6 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; boss &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; jobs &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; sex &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; cost &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; 7 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; temple &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; men &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; god &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; men &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; 8 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; police &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; attack &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; men &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; union &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; 9 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; sex &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; boss &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; jobs &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; ticket &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; 10 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; men &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; mosque &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; accident &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; sanitation &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; 11 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; internet &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; education &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; military &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; bank &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; 12 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; target &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; police &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; allah &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; internet &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; 13 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; accident &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; visa &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; family &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; god &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; 14 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; attack &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; broken &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; attack &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; broken &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:center;"&gt; 15 &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; sports &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; sports &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; work &lt;/td&gt;
+   &lt;td style="text-align:center;"&gt; work &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+---
+
+.center[
+**Protest**
+
+| Model Specification | AUC | Accuracy |  Baseline
+|:-------------------:|-----|----------|:---------:|
+| All Keywords        | 0.9 (0.87, 0.92) | 0.87 (0.84, 0.89) | 0.75 
+| Top 25 Keywords     | 0.9 (0.88, 0.93) | 0.88 (0.85, 0.9) | 0.75 
+| Top 5 Keywords      | 0.89 (0.87, 0.92) | 0.87 (0.84, 0.89) |  0.75 
+]		 
+--
+.center[
+
+&lt;font color = "darkred"&gt;
+
+**Organized Violence**
+
+| Model Specification | AUC | Accuracy |  Baseline
+|:-------------------:|-----|----------|:---------:|
+| All Keywords | 0.92 (0.9, 0.94) | 0.85 (0.82, 0.88) |   0.5 
+| Top 25 Keywords | 0.92 (0.91, 0.94) | 0.85 (0.82, 0.88) | 0.5 
+| Top 5 Keywords | 0.92 (0.9, 0.94) | 0.84 (0.82, 0.87) | 0.5 
+]
+
+--
+
+.center[
+
+&lt;font color = "steelblue"&gt; 
+
+**Violence Against Civilians**
+
+| Model Specification | AUC | Accuracy |  Baseline
+|:-------------------:|-----|----------|:---------:|
+| All Keywords | 0.9 (0.88, 0.92) | 0.8 (0.78, 0.83) | 0.65
+| Top 25 Keywords | 0.9 (0.88, 0.92) | 0.82 (0.79, 0.85) | 0.65 
+| Top 5 Keywords | 0.89 (0.87, 0.91) | 0.82 (0.79, 0.84) | 0.65
+]
+
+
+---
+.center[
+&lt;img src = "Figures/pdp_plot.png",width=500&gt;
+]
+
+---
+
+.center[
+### Protest ~ Keyword: "porn"
+]
+.center[
+&lt;img src = "Figures/porn-keyword-ice.png"&gt;
+]
+
+---
+
+.center[
+### Protest ~ Keyword: "gay"
+]
+.center[
+&lt;img src = "Figures/gay-keyword-ice.png"&gt;
+]
+
+---
+
+.center[
+### Protest ~ Keyword: "wife"
+]
+.center[
+&lt;img src = "Figures/wife-keyword-ice.png"&gt;
+]
+
+---
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+.center[
+# Thanks!
+]
+.pull-left[
+.center[
+###Eric Dunford&lt;br&gt;
+**_Georgetown University_**&lt;br&gt;
+eric.dunford@georgetown.edu&lt;br&gt;[ericdunford.com](ericdunford.com)
+]
+]
+.pull-right[
+.center[
+### David Cunningham&lt;br&gt;
+**_University of Maryland_**&lt;br&gt;
+dacunnin@umd.edu&lt;br&gt;[davidcunninghampolisci.com](davidcunninghampolisci.com)
+]
+]
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();</script>
+
+<script>
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
